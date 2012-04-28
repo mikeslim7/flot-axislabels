@@ -3,49 +3,38 @@ flot-axislabels: Axis Labels plugin for flot
 
 * Original author: Xuan Luo
 * Contributions: Mark Cote
+* Contribultions: Michael Kabugi
 
-[flot-axislabels](https://github.com/markrcote/flot-axislabels) provides 
-flot with the ability to label axes.  It supports any number of axes.   It
-can render the labels with CSS transforms, in canvas, or with traditional
-CSS positioning ("HTML" mode).  flot-axislabels attempts a graceful fallback
-from CSS to canvas to HTML if some modes are not supported.  You can also
-force a particular lesser mode (canvas or HTML).
+[flot-axislabels](https://github.com/mikeslim7/flot-axislabels) In addition to the contributions by Mark (https://github.com/markrcote/flot-axislabels)
+has added support for Flot 1.1 by changing the opts var to be as below:
 
-In both CSS and canvas modes, the y-axis labels are rotated to face the
-graph (90 degrees counter-clockwise for left-hand labels, and 90 degrees
-clockwise for right-hand labels).  In HTML mode, y-axis labels are left
-horizontal (warning: this takes up a lot of space).
+    var opts = axis.options// Flot 0.7
+              || plot.getOptions()[axisName]// Flot 0.6
+              || plot.getOptions();	// Flot 1.1
+              
+This change has been done in the two sectiond it appers and the rest of Mark's script remains the same.
 
-In CSS and HTML modes, each axis label belongs to the classes "axisLabels"
-and "[axisName]Label" (e.g. .xaxisLabel, .y2axisLabel, etc).  You can use
-standard CSS properties to customize their appearance.
-
-In canvas mode, you can set font size and family through flot options (see
-below).
+Before this change, the script was exiting as the variable opts was undefined. This is because the Flot 0.7 and Flot 0.6
+methods return nothing.
 
 
 Example
 -------
 
-    $(function () {
-        var options = {
-            xaxes: [{
-                axisLabel: 'foo',
-            }],
-            yaxes: [{
+    var placeholder = $("#placeholder");
+    var plot = $.plot(placeholder, [{
+            data : graphdata,
+        }], {
+            yaxis : {
+                show : true,
+                axisLabel : 'bar',
                 position: 'left',
-                axisLabel: 'bar',
-            }, {
-                position: 'right',
-                axisLabel: 'bleem'
-            }]
-        };
-
-        $.plot($("#placeholder"),
-               yourData,
-               options);
-        );
-    });
+            },
+            xaxis : {
+                show : true,
+                axisLabel : 'foo',
+            }
+        });
 
 
 Usage
