@@ -330,7 +330,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                 // MEASURE AND SET OPTIONS
                 $.each(plot.getAxes(), function(axisName, axis) {
                     var opts = axis.options // Flot 0.7
-                        || plot.getOptions()[axisName]; // Flot 0.6
+                        || plot.getOptions()[axisName] // Flot 0.6
+                        || plot.getOptions(); // Flot 1.1 
                     if (!opts || !opts.axisLabel || !axis.show)
                         return;
 
@@ -391,7 +392,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                 // DRAW
                 $.each(plot.getAxes(), function(axisName, axis) {
                     var opts = axis.options // Flot 0.7
-                        || plot.getOptions()[axisName]; // Flot 0.6
+                        || plot.getOptions()[axisName] // Flot 0.6
+                        || plot.getOptions(); // Flot 1.1 
                     if (!opts || !opts.axisLabel || !axis.show)
                         return;
 
